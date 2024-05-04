@@ -1,15 +1,17 @@
 import { useForm } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
+import uploadIcon from "/cloud-upload.svg";
 const RegisterPage = () => {
   const form = useForm();
-  const { register, control, handleSubmit, formState } = form;
+  const { register, control, handleSubmit, formState, watch } = form;
+  const password = watch("password");
   const { errors } = formState;
 
   const onSubmit = (data) => {
     console.log("Form submitted", data);
   };
   return (
-    <div className="w-screen h-screen flex justify-center items-center">
+    <div className="w-auto max-h-4/6 flex justify-center items-center">
       <div className="rounded-lg flex flex-col items-center p-4">
         <h1 className="text-black text-3xl text-center pb-5 mt-5">Register</h1>
         <div>
@@ -36,7 +38,7 @@ const RegisterPage = () => {
               id="lastName"
               title="Last Name"
               {...register("lastName", {
-                required: { value: true, message: "Last name is required" },
+                required: { value: true, message: "Last name is required." },
                 pattern: {
                   value: "",
                   message: "Invalid email format",
@@ -51,7 +53,11 @@ const RegisterPage = () => {
               id="email"
               title="Email"
               {...register("email", {
-                required: { value: true, message: "Email is required" },
+                required: { value: true, message: "Email is required." },
+                pattern: {
+                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                  message: "Invalid email address.",
+                },
               })}
             />
             <p className="text-red-500 mb-2">{errors.email?.message}</p>
@@ -62,11 +68,52 @@ const RegisterPage = () => {
               id="password"
               title="Password"
               {...register("password", {
-                required: { value: true, message: "Password is required" },
+                required: { value: true, message: "Password is required." },
               })}
             />
             <p className="text-red-500 mb-2">{errors.password?.message}</p>
-            <button className="p-2 bg-slate-200">Submit</button>
+            <input
+              className="p-3 border-2 rounded-md w-[250px] md:w-[500px] focus:border-slate-800 focus:shadow-lg"
+              placeholder="Confirm Password"
+              type="password"
+              id="confirmPassword"
+              title="Confirm Password"
+              {...register("confirmPassword", {
+                validate: (value) =>
+                  value === password || "The passwords do not match",
+              })}
+            />
+            <p className="text-red-500 mb-2">
+              {errors.confirmPassword?.message}
+            </p>
+            <input
+              id="image"
+              className="hidden"
+              type="file"
+              accept="image/*"
+              {...register("profileImage", {
+                required: {
+                  value: true,
+                  message: "Profile image is required.",
+                },
+              })}
+            />
+            <label
+              htmlFor="image"
+              className="flex flex-col text-center justify-center items-center cursor-pointer"
+            >
+              <img
+                className="w-[50px] h-[50px]"
+                src={uploadIcon}
+                alt="Upload Icon"
+              />
+              Upload profile image
+            </label>
+            <p className="text-red-500 mb-2">{errors.profileImage?.message}</p>
+
+            <button className="p-2 bg-slate-200 hover:bg-slate-700 hover:text-white transition-colors duration-300 rounded-md">
+              Register
+            </button>
           </form>
           <DevTool control={control} />
         </div>

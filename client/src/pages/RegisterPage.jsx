@@ -1,15 +1,42 @@
 import { useForm } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
 import uploadIcon from "/cloud-upload.svg";
+import { useNavigate } from "react-router-dom";
+
 const RegisterPage = () => {
   const form = useForm();
+  const navigate = useNavigate();
   const { register, control, handleSubmit, formState, watch } = form;
   const password = watch("password");
   const { errors } = formState;
   const profileImage = watch("profileImage");
 
-  const onSubmit = (data) => {
-    console.log("Form submitted", data);
+  const onSubmit = async (data) => {
+    console.log(data);
+    try {
+      const url = "http://localhost:3001/auth/register";
+      const formData = new FormData();
+      for (const key in data) {
+        if (key === "profileImage") {
+          formData.append(key, data[key][0]);
+        } else {
+          formData.append(key, data[key]);
+        }
+      }
+
+      const fetchOptions = {
+        method: "POST",
+        body: formData,
+      };
+      const res = await fetch(url, fetchOptions);
+      console.log(formData);
+
+      if (res.ok) {
+        navigate("/login");
+      }
+    } catch (error) {
+      console.error(error.message);
+    }
   };
   return (
     <div className="w-auto max-h-4/6 flex justify-center items-center">

@@ -6,13 +6,14 @@ const RegisterPage = () => {
   const { register, control, handleSubmit, formState, watch } = form;
   const password = watch("password");
   const { errors } = formState;
+  const profileImage = watch("profileImage");
 
   const onSubmit = (data) => {
     console.log("Form submitted", data);
   };
   return (
     <div className="w-auto max-h-4/6 flex justify-center items-center">
-      <div className="rounded-lg flex flex-col items-center p-4">
+      <div className="rounded-lg flex flex-col items-center p-4 my-5">
         <h1 className="text-black text-3xl text-center pb-5 mt-5">Register</h1>
         <div>
           <form
@@ -109,6 +110,15 @@ const RegisterPage = () => {
               />
               Upload profile image
             </label>
+            <div className="flex justify-center">
+              {profileImage && profileImage[0] && (
+                <img
+                  src={URL.createObjectURL(profileImage[0])}
+                  alt="profile photo"
+                  className=" rounded-full w-[80px] h-[80px]"
+                />
+              )}
+            </div>
             <p className="text-red-500 mb-2">{errors.profileImage?.message}</p>
 
             <button className="p-2 bg-slate-200 hover:bg-slate-700 hover:text-white transition-colors duration-300 rounded-md">

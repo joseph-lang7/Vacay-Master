@@ -147,7 +147,6 @@ const RegisterPage = () => {
               )}
             </div>
             <p className="text-red-500 mb-2">{errors.profileImage?.message}</p>
-
             <button className="p-2 bg-slate-200 hover:bg-slate-700 hover:text-white transition-colors duration-300 rounded-md">
               Register
             </button>

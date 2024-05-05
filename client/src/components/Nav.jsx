@@ -20,9 +20,12 @@ const Nav = () => {
   const dispatch = useDispatch();
   return (
     <nav className="w-screen h-20 bg-slate-700 flex items-center px-7 justify-between">
-      <div className="text-white text-2xl">
+      <Link
+        to="/"
+        className="text-white text-2xl hover:scale-110 transition-all duration-300"
+      >
         Vacay<b>Master</b>
-      </div>
+      </Link>
       <button
         onClick={() => setDropdown(!dropdown)}
         className="w-20 bg-white h-12 rounded-full flex items-center gap-2 justify-center"

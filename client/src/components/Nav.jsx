@@ -26,6 +26,13 @@ const Nav = () => {
       >
         Vacay<b>Master</b>
       </Link>
+      <div className="w-[400px] hidden md:block">
+        <input
+          type="search"
+          className="p-3 rounded-full w-full"
+          placeholder="Search..."
+        />
+      </div>
       <button
         onClick={() => setDropdown(!dropdown)}
         className="w-20 h-12  bg-white rounded-full flex items-center gap-2 justify-center"

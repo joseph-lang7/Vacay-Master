@@ -19,7 +19,7 @@ const Nav = () => {
   ];
   const dispatch = useDispatch();
   return (
-    <nav className="w-screen h-20 bg-slate-700 flex items-center gap-3 px-7 justify-between">
+    <nav className="max-w-screen h-20 bg-slate-700 flex items-center gap-3 px-5 justify-between">
       <Link
         to="/"
         className="text-white text-2xl hover:scale-110 transition-all duration-300"

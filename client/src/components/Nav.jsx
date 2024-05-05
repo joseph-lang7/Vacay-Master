@@ -19,7 +19,7 @@ const Nav = () => {
   ];
   const dispatch = useDispatch();
   return (
-    <nav className="w-screen h-20 bg-slate-700 flex items-center px-7 justify-between">
+    <nav className="w-screen h-20 bg-slate-700 flex items-center gap-3 px-7 justify-between">
       <Link
         to="/"
         className="text-white text-2xl hover:scale-110 transition-all duration-300"
@@ -28,12 +28,12 @@ const Nav = () => {
       </Link>
       <button
         onClick={() => setDropdown(!dropdown)}
-        className="w-20 bg-white h-12 rounded-full flex items-center gap-2 justify-center"
+        className="w-20 h-12  bg-white rounded-full flex items-center gap-2 justify-center"
       >
         {!user && (
           <img
             src={profileIcon}
-            className="w-[45px] h-[45px] rounded-full"
+            className="w-[35px] h-[35px] rounded-full"
             alt="Profile photo"
           />
         )}
@@ -44,7 +44,7 @@ const Nav = () => {
               ""
             )}`}
             alt="Profile photo"
-            className="w-[45px] h-[45px] rounded-full object-cover"
+            className="w-[35px] h-[35px]  rounded-full object-cover"
           />
         )}
         <img src={menu} className="w-[25px] h-[25px]" alt="Menu icon" />

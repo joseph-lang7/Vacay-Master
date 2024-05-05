@@ -1,13 +1,40 @@
 import { useForm } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { setLogin } from "../redux/state";
+import { useDispatch } from "react-redux";
 const LoginPage = () => {
   const form = useForm();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { register, control, handleSubmit, formState } = form;
   const { errors } = formState;
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
+    try {
+      const url = "http://localhost:3001/auth/login";
+      const fetchOptions = {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-type": "application/json",
+        },
+      };
+      const res = await fetch(url, fetchOptions);
+      const loggedIn = await res.json();
+
+      if (res.ok && loggedIn) {
+        dispatch(
+          setLogin({
+            user: loggedIn.user,
+            token: loggedIn.token,
+          })
+        );
+        navigate("/");
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
   return (
     <div className="w-auto max-h-4/6 flex justify-center items-center">

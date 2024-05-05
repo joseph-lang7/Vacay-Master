@@ -43,17 +43,17 @@ const LoginPage = () => {
     }
   };
   return (
-    <div className="w-auto max-h-4/6 flex justify-center items-center">
-      <div className="rounded-lg flex flex-col items-center p-4 my-5">
+    <div className=" w-screen max-h-4/6 flex justify-center items-center">
+      <div className="rounded-lg flex flex-col items-center p-4 my-5 w-full">
         <h1 className="text-black text-3xl text-center pb-5 mt-5">Login</h1>
-        <div>
+        <div className="w-[300px] sm:w-[400px] md:w-[500px] lg:w-[600px]">
           <form
             onSubmit={handleSubmit(onSubmit)}
             className="flex flex-col gap-1"
             noValidate
           >
             <input
-              className="p-3 border-2 rounded-md w-[250px] md:w-[500px] focus:border-slate-800 focus:shadow-lg"
+              className="p-3 border-2 rounded-md w-full focus:border-slate-800 focus:shadow-lg"
               placeholder="Email"
               type="text"
               id="email"
@@ -67,7 +67,7 @@ const LoginPage = () => {
             />
             <p className="text-red-500 mb-2">{errors.email?.message}</p>
             <input
-              className="p-3 border-2 rounded-md w-[250px] md:w-[500px] focus:border-slate-800 focus:shadow-lg"
+              className="p-3 border-2 rounded-md w-full focus:border-slate-800 focus:shadow-lg"
               placeholder="Password"
               type="password"
               id="password"

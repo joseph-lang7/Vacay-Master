@@ -3,12 +3,16 @@ import { DevTool } from "@hookform/devtools";
 import { Link, useNavigate } from "react-router-dom";
 import { setLogin } from "../redux/state";
 import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const LoginPage = () => {
   const form = useForm();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { register, control, handleSubmit, formState } = form;
   const { errors } = formState;
+
+  const showErrorMessage = () => toast.error("Invalid credentials");
 
   const onSubmit = async (data) => {
     try {
@@ -31,6 +35,8 @@ const LoginPage = () => {
           })
         );
         navigate("/");
+      } else if (!res.ok) {
+        showErrorMessage();
       }
     } catch (error) {
       console.error(error);

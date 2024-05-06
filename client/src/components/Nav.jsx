@@ -12,6 +12,7 @@ const Nav = () => {
     { label: "Wish List", href: "2" },
     { label: "Property List", href: "3" },
     { label: "Reservation List", href: "4" },
+    { label: "Create a Listing", href: "/create-listing" },
   ];
   const unauthenticatedDropdownItems = [
     { label: "Login", href: "/login" },
@@ -56,7 +57,7 @@ const Nav = () => {
         )}
         <img src={menu} className="w-[25px] h-[25px]" alt="Menu icon" />
         {dropdown && user && (
-          <div className="absolute bg-slate-700 text-white h-auto p-5 w-auto  translate-y-40">
+          <div className="absolute bg-slate-700 text-white h-auto p-5 w-auto  translate-y-48">
             <ul className="flex flex-col gap-4">
               {authenticatedDropdownItems.map((dropdownItem) => (
                 <li key={dropdownItem.href}>
